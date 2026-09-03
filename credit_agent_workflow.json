@@ -1,0 +1,2218 @@
+{
+  "id": "nrCz2EyQA2Ba2fR5",
+  "name": "Credit Agent Workflow",
+  "active": true,
+  "isArchived": false,
+  "versionId": "98cf2d80-8f7b-4560-b50a-2ef8f273c6c7",
+  "activeVersionId": "85c0eaf1-2c7c-4ec4-ab88-25e096ae0653",
+  "triggerCount": 1,
+  "createdAt": "2026-08-26T13:16:59.897Z",
+  "updatedAt": "2026-09-03T17:47:12.747Z",
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": true,
+    "binaryMode": "separate"
+  },
+  "connections": {
+    "AI Agent: Loan Recommender": {
+      "main": [
+        [
+          {
+            "node": "Merge Results",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Vector DB Retrieval: Loan Recommender": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent: Loan Recommender",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge Results": {
+      "main": [
+        [
+          {
+            "node": "Format Report",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Bank Statement": {
+      "main": [
+        [
+          {
+            "node": "Code: Calc Cash Flow",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code: Calc Cash Flow": {
+      "main": [
+        [
+          {
+            "node": "Code: Stress Scenarios",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code: Stress Scenarios": {
+      "main": [
+        [
+          {
+            "node": "Merge Results",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract PDF": {
+      "main": [
+        [
+          {
+            "node": "AI Agent: Contract Checker",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent: Contract Checker": {
+      "main": [
+        [
+          {
+            "node": "Merge Results",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Vector DB Norms Retrieval": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent: Contract Checker",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loan Terms Input": {
+      "main": [
+        [
+          {
+            "node": "Code: Amortization Calc",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code: Amortization Calc": {
+      "main": [
+        [
+          {
+            "node": "Code: Compare to Invest",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code: Compare to Invest": {
+      "main": [
+        [
+          {
+            "node": "Merge Results",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "9router Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent: Loan Recommender",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "9router Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent: Contract Checker",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set: Business Profile": {
+      "main": [
+        [
+          {
+            "node": "Switch Router",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch Router": {
+      "main": [
+        [
+          {
+            "node": "AI Agent: Loan Recommender",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Fetch Bank Statement",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Extract PDF",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Loan Terms Input",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook Trigger": {
+      "main": [
+        [
+          {
+            "node": "Set: Business Profile",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Workflow Trigger": {
+      "main": [
+        [
+          {
+            "node": "Set: Business Profile",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Report": {
+      "main": [
+        [
+          {
+            "node": "Detect Trigger Source",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Detect Trigger Source": {
+      "main": [
+        [
+          {
+            "node": "Route Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Route Response": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Orchestrator Status Reply",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings Ollama": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Vector DB Retrieval: Loan Recommender",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings Ollama1": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Vector DB Norms Retrieval",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "nodes": [
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "business_age",
+              "name": "business_age",
+              "type": "number",
+              "value": "={{ $json.business_age ?? $json.body?.business_age ?? 3 }}"
+            },
+            {
+              "id": "loan_purpose",
+              "name": "loan_purpose",
+              "type": "string",
+              "value": "={{ $json.loan_purpose || $json.body?.loan_purpose || 'Working capital expansion' }}"
+            },
+            {
+              "id": "amount_needed",
+              "name": "amount_needed",
+              "type": "number",
+              "value": "={{ $json.amount_needed ?? $json.body?.amount_needed ?? 1000000 }}"
+            },
+            {
+              "id": "collateral_available",
+              "name": "collateral_available",
+              "type": "string",
+              "value": "={{ $json.collateral_available || $json.body?.collateral_available || 'Property worth 1.5M' }}"
+            },
+            {
+              "id": "owner_category",
+              "name": "owner_category",
+              "type": "string",
+              "value": "={{ $json.owner_category || $json.body?.owner_category || 'MSME General' }}"
+            },
+            {
+              "id": "credit_score",
+              "name": "credit_score",
+              "type": "number",
+              "value": "={{ $json.credit_score ?? $json.body?.credit_score ?? 750 }}"
+            },
+            {
+              "id": "proposed_emi",
+              "name": "proposed_emi",
+              "type": "number",
+              "value": "={{ $json.proposed_emi ?? $json.body?.proposed_emi }}"
+            },
+            {
+              "id": "intent",
+              "name": "intent",
+              "type": "string",
+              "value": "={{ $json.chatInput || $json.intent || $json.body?.intent || 'Recommend loan options, check affordability, check contract clauses, and evaluate prepayment vs investment' }}"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "4297a48b-f3c4-4669-90c5-aea13dd6307f",
+      "name": "Set: Business Profile",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        288,
+        688
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Business Profile:\n- Business Age: {{ $json.business_age }} years\n- Purpose: {{ $json.loan_purpose }}\n- Amount Needed: {{ $json.amount_needed }}\n- Collateral: {{ $json.collateral_available }}\n- Owner Category: {{ $json.owner_category }}\n- Credit Score: {{ $json.credit_score }}\n- User Intent: {{ $json.intent }}\n\nRecommend the single best-fit loan type for this business profile.",
+        "options": {
+          "systemMessage": "You are a credit advisor. Recommend the single best-fit loan type for this business profile using ONLY the retrieved context. Cite the specific circular/scheme/section for every claim. Explain benefits: leverage, tax deductibility, liquidity, CIBIL impact, and any scheme-specific perks. If the retrieved context doesn't cover the situation, say so explicitly rather than guessing."
+        }
+      },
+      "id": "e685689d-4c90-458b-9013-9d166c4a808b",
+      "name": "AI Agent: Loan Recommender",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        1168,
+        176
+      ],
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolDescription": "Search knowledge base of business loan schemes, circulars, and policies",
+        "pineconeIndex": {
+          "__rl": true,
+          "value": "loan",
+          "mode": "list",
+          "cachedResultName": "loan"
+        },
+        "topK": 6,
+        "options": {
+          "pineconeNamespace": "loan-recommender-docs"
+        }
+      },
+      "id": "cb0cd07e-e473-4ee2-b45c-de01c1d9aad3",
+      "name": "Vector DB Retrieval: Loan Recommender",
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "typeVersion": 1.3,
+      "position": [
+        1264,
+        320
+      ],
+      "credentials": {
+        "pineconeApi": {
+          "id": "9EArayBGLvsHOMA9",
+          "name": "Pinecone account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "let intentText = '';\ntry {\n  intentText = $('Set: Business Profile').first()?.json?.intent || '';\n} catch (e) {}\n\nconst intentLower = (intentText || '').toLowerCase();\nconst isBroadIntent = !intentLower || intentLower.includes('all') || intentLower.includes('comprehensive');\n\nconst expectB1 = isBroadIntent || ['recommend', 'loan', 'option', 'best', 'scheme', 'policy'].some(k => intentLower.includes(k));\nconst expectB2 = isBroadIntent || ['afford', 'emi', 'cash flow', 'stress', 'bank', 'statement'].some(k => intentLower.includes(k));\nconst expectB3 = isBroadIntent || ['contract', 'sanction', 'clause', 'charge', 'fee', 'kfs', 'penalty'].some(k => intentLower.includes(k));\nconst expectB4 = isBroadIntent || ['prepay', 'invest', 'lump', 'amortization', 'saving'].some(k => intentLower.includes(k));\n\nlet f1Node = null;\nlet f2Node = null;\nlet f3Node = null;\nlet f4Node = null;\n\ntry { f1Node = $('AI Agent: Loan Recommender').first()?.json; } catch (e) {}\ntry { f2Node = $('Code: Stress Scenarios').first()?.json; } catch (e) {}\ntry { f3Node = $('AI Agent: Contract Checker').first()?.json; } catch (e) {}\ntry { f4Node = $('Code: Compare to Invest').first()?.json; } catch (e) {}\n\nconst b1Ready = !expectB1 || !!f1Node;\nconst b2Ready = !expectB2 || !!f2Node;\nconst b3Ready = !expectB3 || !!f3Node;\nconst b4Ready = !expectB4 || !!f4Node;\n\nif (!b1Ready || !b2Ready || !b3Ready || !b4Ready) {\n  return [];\n}\n\nlet loanRec = null;\nlet b1Status = 'skipped';\nif (expectB1) {\n  if (f1Node) {\n    if (f1Node.error) {\n      b1Status = 'failed';\n      loanRec = { error: f1Node.error.message || 'Loan recommender agent encountered an error.' };\n    } else {\n      b1Status = 'completed';\n      loanRec = f1Node.output || f1Node.loan_recommendation || f1Node.text || f1Node;\n    }\n  } else {\n    b1Status = 'missing';\n  }\n}\n\nlet affordability = null;\nlet b2Status = 'skipped';\nif (expectB2) {\n  if (f2Node) {\n    if (f2Node.error) {\n      b2Status = 'failed';\n      affordability = { error: f2Node.error.message || 'Affordability evaluation failed.' };\n    } else {\n      b2Status = 'completed';\n      affordability = f2Node.affordability_verdict || f2Node;\n    }\n  } else {\n    b2Status = 'missing';\n  }\n}\n\nlet flaggedClauses = null;\nlet b3Status = 'skipped';\nif (expectB3) {\n  if (f3Node) {\n    if (f3Node.error) {\n      b3Status = 'failed';\n      flaggedClauses = { error: f3Node.error.message || 'Contract audit agent encountered an error.' };\n    } else {\n      b3Status = 'completed';\n      flaggedClauses = f3Node.output || f3Node.flagged_clauses || f3Node.text || f3Node;\n    }\n  } else {\n    b3Status = 'missing';\n  }\n}\n\nlet prepayVsInvest = null;\nlet b4Status = 'skipped';\nif (expectB4) {\n  if (f4Node) {\n    if (f4Node.error) {\n      b4Status = 'failed';\n      prepayVsInvest = { error: f4Node.error.message || 'Prepayment evaluation failed.' };\n    } else {\n      b4Status = 'completed';\n      prepayVsInvest = f4Node.prepay_vs_invest_comparison || f4Node;\n    }\n  } else {\n    b4Status = 'missing';\n  }\n}\n\nconst branchStatus = {\n  branch_1_loan_recommender: b1Status,\n  branch_2_affordability: b2Status,\n  branch_3_contract_audit: b3Status,\n  branch_4_prepayment_invest: b4Status,\n};\n\nconst branchesExecuted = Object.keys(branchStatus).filter(k => branchStatus[k] === 'completed');\nconst branchesFailed = Object.keys(branchStatus).filter(k => branchStatus[k] === 'failed');\n\nreturn [{\n  json: {\n    loan_recommendation: loanRec,\n    affordability_verdict: affordability,\n    flagged_clauses: flaggedClauses,\n    prepay_vs_invest_comparison: prepayVsInvest,\n    meta: {\n      branch_status: branchStatus,\n      branches_executed: branchesExecuted,\n      branches_failed: branchesFailed,\n      all_expected_succeeded: branchesFailed.length === 0\n    }\n  }\n}];"
+      },
+      "id": "26a16688-66df-4503-a0df-a40764c85597",
+      "name": "Merge Results",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1824,
+        624
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://httpbin.org/get",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          },
+          "timeout": 1000
+        }
+      },
+      "id": "2a9460fd-b1e4-4341-931a-a2d12d976299",
+      "name": "Fetch Bank Statement",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        1072,
+        624
+      ],
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\nlet transactions = [];\nlet profile = {};\ntry { profile = $('Set: Business Profile').first()?.json || {}; } catch(e) {}\n\nfor (const item of items) {\n  if (item.json && item.json.transactions && Array.isArray(item.json.transactions)) {\n    transactions = item.json.transactions;\n  }\n}\n\nif (transactions.length === 0) {\n  const amountNeeded = Number(profile.amount_needed) || 1000000;\n  const avgInc = Number(profile.avg_monthly_income) || Math.round(amountNeeded * 0.45);\n  const avgExp = Number(profile.avg_monthly_expense) || Math.round(avgInc * 0.70);\n\n  transactions = [\n    { month: 'M-1', income: Math.round(avgInc * 0.95), expense: Math.round(avgExp * 0.98) },\n    { month: 'M-2', income: Math.round(avgInc * 1.05), expense: Math.round(avgExp * 1.02) },\n    { month: 'M-3', income: Math.round(avgInc * 1.00), expense: Math.round(avgExp * 1.00) },\n    { month: 'M-4', income: Math.round(avgInc * 0.90), expense: Math.round(avgExp * 0.95) },\n    { month: 'M-5', income: Math.round(avgInc * 1.10), expense: Math.round(avgExp * 1.05) },\n    { month: 'M-6', income: Math.round(avgInc * 1.00), expense: Math.round(avgExp * 1.00) }\n  ];\n}\n\nconst surpluses = transactions.map(t => (Number(t.income) || 0) - (Number(t.expense) || 0));\nconst totalSurplus = surpluses.reduce((a, b) => a + b, 0);\nconst avgSurplus = surpluses.length > 0 ? Math.round(totalSurplus / surpluses.length) : 0;\nconst minSurplus = surpluses.length > 0 ? Math.min(...surpluses) : 0;\nconst totalIncome = transactions.reduce((sum, t) => sum + (Number(t.income) || 0), 0);\nconst avgIncome = Math.round(totalIncome / (transactions.length || 1));\n\nreturn [{\n  json: {\n    monthly_transactions: transactions,\n    surpluses: surpluses,\n    average_monthly_income: avgIncome,\n    average_monthly_surplus: avgSurplus,\n    minimum_monthly_surplus: minSurplus\n  }\n}];"
+      },
+      "id": "37776b00-6b1a-4fd1-88c2-8375d2be1857",
+      "name": "Code: Calc Cash Flow",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1248,
+        624
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const cashFlow = $input.first().json;\nlet profile = {};\ntry { profile = $('Set: Business Profile').first().json || {}; } catch(e) {}\n\nconst amountNeeded = Number(profile.amount_needed) || 1000000;\nconst proposedEmi = Number(profile.proposed_emi) || Math.round(amountNeeded * 0.025);\nconst emergencyShockAmount = Number(profile.emergency_shock_amount) || 50000;\n\nconst avgSurplus = cashFlow.average_monthly_surplus || 150000;\nconst avgIncome = cashFlow.average_monthly_income || 500000;\n\nconst revDrop20Surplus = Math.round(avgSurplus - (avgIncome * 0.20));\nconst revDrop30Surplus = Math.round(avgSurplus - (avgIncome * 0.30));\nconst delay30DaysSurplus = Math.round(avgSurplus * 0.70);\nconst shockExpenseSurplus = Math.round(avgSurplus - emergencyShockAmount);\n\nconst scenarios = [\n  {\n    name: 'Baseline Surplus',\n    surplus: avgSurplus,\n    passed: avgSurplus >= proposedEmi,\n    cushion: avgSurplus - proposedEmi,\n    description: 'Historical average monthly net surplus'\n  },\n  {\n    name: 'Revenue Shock -20%',\n    surplus: revDrop20Surplus,\n    passed: revDrop20Surplus >= proposedEmi,\n    cushion: revDrop20Surplus - proposedEmi,\n    description: '20% drop in monthly turnover'\n  },\n  {\n    name: 'Revenue Shock -30%',\n    surplus: revDrop30Surplus,\n    passed: revDrop30Surplus >= proposedEmi,\n    cushion: revDrop30Surplus - proposedEmi,\n    description: '30% catastrophic revenue collapse'\n  },\n  {\n    name: '30-Day Payment Delay (Liquidity Haircut)',\n    surplus: delay30DaysSurplus,\n    passed: delay30DaysSurplus >= proposedEmi,\n    cushion: delay30DaysSurplus - proposedEmi,\n    description: 'Working capital realization delay'\n  },\n  {\n    name: 'Emergency Expense Shock',\n    surplus: shockExpenseSurplus,\n    passed: shockExpenseSurplus >= proposedEmi,\n    cushion: shockExpenseSurplus - proposedEmi,\n    description: `One-off unplanned expense of ₹${emergencyShockAmount}`\n  }\n];\n\nconst failedTests = scenarios.filter(s => !s.passed);\nconst failedCount = failedTests.length;\n\nlet verdict = 'affordable';\nlet riskLevel = 'Low';\nlet summary = 'Sufficient cash flow cushion across all stress scenarios.';\n\nif (proposedEmi > avgSurplus || failedCount >= 3) {\n  verdict = 'not_affordable';\n  riskLevel = 'High';\n  summary = `High default risk: Proposed EMI of ₹${proposedEmi} fails ${failedCount}/5 stress shocks.`;\n} else if (failedCount >= 1) {\n  verdict = 'risky';\n  riskLevel = 'Medium';\n  summary = `Moderate vulnerability: Proposed EMI is serviceable in baseline, but fails ${failedCount} stress shock(s) (${failedTests.map(f => f.name).join(', ')}).`;\n}\n\nconst suggestedEmiCeiling = Math.max(0, Math.round(Math.min(avgSurplus * 0.60, revDrop20Surplus * 0.80)));\nconst dscrProxy = proposedEmi > 0 ? Number((avgSurplus / proposedEmi).toFixed(2)) : 999;\n\nreturn [{\n  json: {\n    affordability_verdict: {\n      proposed_emi: proposedEmi,\n      verdict: verdict,\n      risk_level: riskLevel,\n      suggested_emi_ceiling: suggestedEmiCeiling,\n      dscr_proxy: dscrProxy,\n      summary: summary,\n      stress_scenarios: scenarios,\n      failed_shock_count: failedCount\n    }\n  }\n}];"
+      },
+      "id": "57b97de5-8ddd-488f-890c-4f8e1040db9a",
+      "name": "Code: Stress Scenarios",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1424,
+        624
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "pdf",
+        "options": {}
+      },
+      "id": "4b917d5b-2536-4252-b4bc-147087803379",
+      "name": "Extract PDF",
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1.1,
+      "position": [
+        896,
+        800
+      ],
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Extracted Contract Text:\n{{ $json.text || $json.data || 'Sample contract: Processing fee 3.5%, Prepayment penalty 4%, Floating rate with 5% conversion fee.' }}\n\nCompare this contract against regulatory norms.",
+        "options": {
+          "systemMessage": "Compare this loan contract's terms against the retrieved regulatory norms. Flag: processing fees above typical market rate, prepayment/foreclosure penalties, teaser rates, floating-vs-fixed conversion clauses, late payment/bounce charges, bundled insurance. For each flag, quote the specific contract clause and explain the risk in plain language. Cite the regulatory source for what 'normal' looks like."
+        }
+      },
+      "id": "deff42d7-679d-49d5-8b4a-87fd5e2db66a",
+      "name": "AI Agent: Contract Checker",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        1072,
+        800
+      ],
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolDescription": "Search RBI Fair Practices Code and Key Fact Statement regulatory norms",
+        "pineconeIndex": {
+          "__rl": true,
+          "value": "loan",
+          "mode": "list",
+          "cachedResultName": "loan"
+        },
+        "topK": 6,
+        "options": {
+          "pineconeNamespace": "fair-practices-docs"
+        }
+      },
+      "id": "2b76ba43-1e6d-427c-942c-81d2b8b56b5d",
+      "name": "Vector DB Norms Retrieval",
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "typeVersion": 1.3,
+      "position": [
+        1168,
+        944
+      ],
+      "credentials": {
+        "pineconeApi": {
+          "id": "9EArayBGLvsHOMA9",
+          "name": "Pinecone account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "principal_remaining",
+              "name": "principal_remaining",
+              "value": "={{ $json.principal_remaining || 1000000 }}",
+              "type": "number"
+            },
+            {
+              "id": "interest_rate",
+              "name": "interest_rate",
+              "value": "={{ $json.interest_rate || 12 }}",
+              "type": "number"
+            },
+            {
+              "id": "tenure_remaining_months",
+              "name": "tenure_remaining_months",
+              "value": "={{ $json.tenure_remaining_months || 36 }}",
+              "type": "number"
+            },
+            {
+              "id": "lump_sum_available",
+              "name": "lump_sum_available",
+              "value": "={{ $json.lump_sum_available || 300000 }}",
+              "type": "number"
+            },
+            {
+              "id": "expected_investment_return_rate",
+              "name": "expected_investment_return_rate",
+              "value": "={{ $json.expected_investment_return_rate || 10 }}",
+              "type": "number"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "8b221e4b-eb12-45a0-ad35-c21b1c09342c",
+      "name": "Loan Terms Input",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        1088,
+        1264
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const input = $input.first().json;\nlet profile = {};\ntry { profile = $('Set: Business Profile').first().json || {}; } catch(e) {}\n\nconst principal = Number(input.principal_remaining || profile.principal_remaining || profile.amount_needed) || 1000000;\nconst annualRate = Number(input.interest_rate || profile.interest_rate) || 12;\nconst totalMonths = Number(input.tenure_remaining_months || profile.tenure_remaining_months) || 36;\nconst lumpSum = Number(input.lump_sum_available || profile.lump_sum_available) || 300000;\nconst expectedInvestRate = Number(input.expected_investment_return_rate || profile.expected_investment_return_rate) || 10;\nconst taxRate = profile.tax_rate !== undefined ? Number(profile.tax_rate) : 0.25;\n\nconst monthlyRate = annualRate / (12 * 100);\n\nlet emi = 0;\nif (monthlyRate === 0) {\n  emi = Math.round(principal / totalMonths);\n} else {\n  const factor = Math.pow(1 + monthlyRate, totalMonths);\n  emi = Math.round((principal * monthlyRate * factor) / (factor - 1));\n}\n\nlet baselineBalance = principal;\nlet baselineTotalInterest = 0;\nfor (let m = 1; m <= totalMonths; m++) {\n  const interest = monthlyRate > 0 ? baselineBalance * monthlyRate : 0;\n  const principalPaid = Math.min(baselineBalance, emi - interest);\n  baselineTotalInterest += interest;\n  baselineBalance -= principalPaid;\n}\n\nconst effectiveLumpSum = Math.min(principal, lumpSum);\nconst newPrincipal = Math.max(0, principal - effectiveLumpSum);\n\nlet prepaidTotalInterest = 0;\nlet prepaidMonths = 0;\nlet prepayBalance = newPrincipal;\n\nif (newPrincipal > 0) {\n  while (prepayBalance > 1 && prepaidMonths < totalMonths) {\n    prepaidMonths++;\n    const interest = monthlyRate > 0 ? prepayBalance * monthlyRate : 0;\n    const principalPaid = Math.min(prepayBalance, emi - interest);\n    prepaidTotalInterest += interest;\n    prepayBalance -= principalPaid;\n    if (principalPaid <= 0) break;\n  }\n}\n\nconst grossInterestSaved = Math.round(Math.max(0, baselineTotalInterest - prepaidTotalInterest));\nconst afterTaxInterestSaved = Math.round(grossInterestSaved * (1 - taxRate));\nconst tenureReducedMonths = totalMonths - prepaidMonths;\n\nreturn [{\n  json: {\n    principal_remaining: principal,\n    interest_rate: annualRate,\n    tenure_remaining_months: totalMonths,\n    lump_sum_applied: effectiveLumpSum,\n    monthly_emi: emi,\n    baseline_total_interest: Math.round(baselineTotalInterest),\n    prepaid_total_interest: Math.round(prepaidTotalInterest),\n    gross_interest_saved: grossInterestSaved,\n    after_tax_interest_saved: afterTaxInterestSaved,\n    original_tenure_months: totalMonths,\n    new_tenure_months: prepaidMonths,\n    tenure_reduced_months: tenureReducedMonths,\n    expected_investment_return_rate: expectedInvestRate,\n    tax_rate: taxRate\n  }\n}];"
+      },
+      "id": "ed83a5b8-7b08-4b4c-9c90-1d170c52090d",
+      "name": "Code: Amortization Calc",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1264,
+        1264
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const prepay = $input.first().json;\nlet profile = {};\ntry { profile = $('Set: Business Profile').first().json || {}; } catch(e) {}\n\nconst lumpSum = prepay.lump_sum_applied || Number(profile.lump_sum_available) || 300000;\nconst returnRate = prepay.expected_investment_return_rate || Number(profile.expected_investment_return_rate) || 10;\nconst horizonYears = (prepay.original_tenure_months || 36) / 12;\nconst taxRate = prepay.tax_rate !== undefined ? prepay.tax_rate : 0.25;\nconst investTaxRate = 0.125; // 12.5% LTCG\n\nconst futureValueGross = Math.round(lumpSum * Math.pow(1 + (returnRate / 100), horizonYears));\nconst grossGain = Math.max(0, futureValueGross - lumpSum);\nconst afterTaxGain = Math.round(grossGain * (1 - investTaxRate));\nconst afterTaxInterestSaved = prepay.after_tax_interest_saved || Math.round((prepay.gross_interest_saved || 0) * (1 - taxRate));\n\nlet recommendation = '';\nlet riskNote = '';\n\nif (afterTaxInterestSaved > afterTaxGain) {\n  const diff = afterTaxInterestSaved - afterTaxGain;\n  recommendation = `Prepay Loan: Guaranteed risk-free after-tax savings of ₹${afterTaxInterestSaved.toLocaleString('en-IN')} exceed projected after-tax investment gains by ₹${diff.toLocaleString('en-IN')}.`;\n  riskNote = 'Prepayment offers 100% risk-free return and immediately strengthens balance sheet liquidity.';\n} else {\n  const diff = afterTaxGain - afterTaxInterestSaved;\n  recommendation = `Invest Surplus: Projected after-tax investment gain of ₹${afterTaxGain.toLocaleString('en-IN')} exceeds loan interest savings by ₹${diff.toLocaleString('en-IN')}.`;\n  riskNote = 'Notice: Investment returns carry market risk, while loan prepayment yields guaranteed risk-free savings.';\n}\n\nreturn [{\n  json: {\n    prepay_vs_invest_comparison: {\n      lump_sum_amount: lumpSum,\n      time_horizon_years: horizonYears,\n      prepayment: {\n        gross_interest_saved: prepay.gross_interest_saved || 0,\n        after_tax_interest_saved: afterTaxInterestSaved,\n        tenure_reduced_months: prepay.tenure_reduced_months || 0\n      },\n      investment: {\n        expected_annual_return_pct: returnRate,\n        gross_gain: grossGain,\n        after_tax_gain: afterTaxGain,\n        projected_future_value: futureValueGross\n      },\n      recommendation: recommendation,\n      risk_disclaimer: riskNote\n    }\n  }\n}];"
+      },
+      "id": "4b959f01-e05e-4d82-bacc-efaebe187452",
+      "name": "Code: Compare to Invest",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1440,
+        1264
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "output-report",
+              "name": "output",
+              "value": "={{ '## Credit Agent Advisory Report\\n\\n' + ($json.affordability_verdict ? ('### Cash Flow Affordability\\n- Verdict: ' + $json.affordability_verdict.verdict + '\\n- Proposed EMI: ₹' + $json.affordability_verdict.proposed_emi + '\\n- Suggested Ceiling: ₹' + $json.affordability_verdict.suggested_emi_ceiling + '\\n\\n') : '') + ($json.prepay_vs_invest_comparison ? ('### Prepayment vs Investment\\n- Lump Sum: ₹' + $json.prepay_vs_invest_comparison.lump_sum_amount + '\\n- Interest Saved: ₹' + $json.prepay_vs_invest_comparison.prepayment.interest_saved_guaranteed + '\\n- Recommendation: ' + $json.prepay_vs_invest_comparison.recommendation + '\\n\\n') : '') + ($json.loan_recommendation ? ('### Loan Recommendation\\n' + (typeof $json.loan_recommendation === 'string' ? $json.loan_recommendation : JSON.stringify($json.loan_recommendation)) + '\\n\\n') : '') + ($json.flagged_clauses ? ('### Contract Audit\\n' + (typeof $json.flagged_clauses === 'string' ? $json.flagged_clauses : JSON.stringify($json.flagged_clauses)) + '\\n\\n') : '') }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "5aaf54df-f210-4448-9c5f-94c05d15c5f5",
+      "name": "Format Report",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        2016,
+        624
+      ]
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gemini/gemini-3.6-flash"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1168,
+        384
+      ],
+      "id": "855b6358-dcd9-436c-86b2-c594f3604774",
+      "name": "9router Chat Model1",
+      "credentials": {
+        "openAiApi": {
+          "id": "pBG122sA6PR3GtIL",
+          "name": "OpenAI account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gemini/gemini-3.6-flash"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1072,
+        1008
+      ],
+      "id": "bc209115-7f84-4bb3-89dc-8b2dbf4cfaf3",
+      "name": "9router Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "pBG122sA6PR3GtIL",
+          "name": "OpenAI account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "combinator": "or",
+                "conditions": [
+                  {
+                    "id": "b75cb20c-4287-48c7-a0c0-5f897a84a87c",
+                    "leftValue": "={{ $json.intent }}",
+                    "operator": {
+                      "operation": "contains",
+                      "type": "string"
+                    },
+                    "rightValue": "recommend"
+                  },
+                  {
+                    "id": "2311a657-85f3-41b2-b051-7eb2dbae8d84",
+                    "leftValue": "={{ $json.intent }}",
+                    "operator": {
+                      "operation": "contains",
+                      "type": "string"
+                    },
+                    "rightValue": "loan"
+                  },
+                  {
+                    "id": "994fcb0b-3806-4076-a59e-55d45f57cb3f",
+                    "leftValue": "={{ $json.intent }}",
+                    "operator": {
+                      "operation": "contains",
+                      "type": "string"
+                    },
+                    "rightValue": "option"
+                  },
+                  {
+                    "id": "530860bb-cf73-4886-84d2-0ffd7ab8e932",
+                    "leftValue": "={{ $json.intent }}",
+                    "operator": {
+                      "operation": "contains",
+                      "type": "string"
+                    },
+                    "rightValue": "best"
+                  }
+                ],
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                }
+              }
+            },
+            {
+              "conditions": {
+                "combinator": "or",
+                "conditions": [
+                  {
+                    "id": "2f2b0772-d615-4967-a8e9-6ee78faac9b3",
+                    "leftValue": "={{ $json.intent }}",
+                    "operator": {
+                      "operation": "contains",
+                      "type": "string"
+                    },
+                    "rightValue": "afford"
+                  },
+                  {
+                    "id": "defa59ff-dfa3-4e37-9455-cfec26278a7e",
+                    "leftValue": "={{ $json.intent }}",
+                    "operator": {
+                      "operation": "contains",
+                      "type": "string"
+                    },
+                    "rightValue": "emi"
+                  },
+                  {
+                    "id": "31e793b1-31a7-4329-8320-8ee821845780",
+                    "leftValue": "={{ $json.intent }}",
+                    "operator": {
+                      "operation": "contains",
+                      "type": "string"
+                    },
+                    "rightValue": "cash flow"
+                  },
+                  {
+                    "id": "6806cf7a-c03d-44e0-bfe8-2f0bd80b365f",
+                    "leftValue": "={{ $json.intent }}",
+                    "operator": {
+                      "operation": "contains",
+                      "type": "string"
+                    },
+                    "rightValue": "stress"
+                  }
+                ],
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                }
+              }
+            },
+            {
+              "conditions": {
+                "combinator": "or",
+                "conditions": [
+                  {
+                    "id": "4b9ef2b7-a461-4528-84e3-1e2aaf494697",
+                    "leftValue": "={{ $json.intent }}",
+                    "operator": {
+                      "operation": "contains",
+                      "type": "string"
+                    },
+                    "rightValue": "contract"
+                  },
+                  {
+                    "id": "af1b0a06-9955-4218-98c5-6eb3b21f84eb",
+                    "leftValue": "={{ $json.intent }}",
+                    "operator": {
+                      "operation": "contains",
+                      "type": "string"
+                    },
+                    "rightValue": "sanction"
+                  },
+                  {
+                    "id": "d7be929e-c64c-4a79-a804-ef66d60cb5fe",
+                    "leftValue": "={{ $json.intent }}",
+                    "operator": {
+                      "operation": "contains",
+                      "type": "string"
+                    },
+                    "rightValue": "clause"
+                  },
+                  {
+                    "id": "ca3b2a1d-10da-4abe-b1d8-3ae1804cf06a",
+                    "leftValue": "={{ $json.intent }}",
+                    "operator": {
+                      "operation": "contains",
+                      "type": "string"
+                    },
+                    "rightValue": "charge"
+                  },
+                  {
+                    "id": "0b86abe1-4033-4d59-adc9-9f89fe83b25a",
+                    "leftValue": "={{ $json.intent }}",
+                    "operator": {
+                      "operation": "contains",
+                      "type": "string"
+                    },
+                    "rightValue": "fee"
+                  }
+                ],
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                }
+              }
+            },
+            {
+              "conditions": {
+                "combinator": "or",
+                "conditions": [
+                  {
+                    "id": "ad045da5-a62c-4398-b943-c2bd01995206",
+                    "leftValue": "={{ $json.intent }}",
+                    "operator": {
+                      "operation": "contains",
+                      "type": "string"
+                    },
+                    "rightValue": "prepay"
+                  },
+                  {
+                    "id": "e0ab1d56-e981-4eb6-bded-9375055574c1",
+                    "leftValue": "={{ $json.intent }}",
+                    "operator": {
+                      "operation": "contains",
+                      "type": "string"
+                    },
+                    "rightValue": "invest"
+                  },
+                  {
+                    "id": "21911ca8-e4f1-4e27-abab-d69886d59131",
+                    "leftValue": "={{ $json.intent }}",
+                    "operator": {
+                      "operation": "contains",
+                      "type": "string"
+                    },
+                    "rightValue": "lump"
+                  },
+                  {
+                    "id": "d7465f01-24fa-4d8a-a831-ae9facfb51b9",
+                    "leftValue": "={{ $json.intent }}",
+                    "operator": {
+                      "operation": "contains",
+                      "type": "string"
+                    },
+                    "rightValue": "amortization"
+                  }
+                ],
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                }
+              }
+            }
+          ]
+        },
+        "options": {
+          "allMatchingOutputs": true
+        }
+      },
+      "id": "bf349a09-95f8-4608-8926-b67890d537a2",
+      "name": "Switch Router",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        448,
+        656
+      ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "credit-agent",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "d63ac00e-d224-44b8-9077-1348b853828b",
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        48,
+        608
+      ],
+      "webhookId": "147bb83c-449a-47c7-9ccf-ca761876255a"
+    },
+    {
+      "parameters": {},
+      "id": "3852aada-c1d8-4e63-bda3-ed38755f907c",
+      "name": "Execute Workflow Trigger",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        48,
+        768
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "let triggeredBy = 'manual_chat';\n\ntry {\n  if ($('Webhook Trigger').first()?.json) {\n    triggeredBy = 'webhook';\n  }\n} catch (e) {}\n\nif (triggeredBy === 'manual_chat') {\n  try {\n    if ($('Execute Workflow Trigger').first()?.json) {\n      triggeredBy = 'orchestrator';\n    }\n  } catch (e) {}\n}\n\nif (triggeredBy === 'manual_chat' && $execution.mode === 'webhook') {\n  triggeredBy = 'webhook';\n}\n\nconst item = $input.first()?.json || {};\n\nreturn [{\n  json: {\n    ...item,\n    triggered_by: triggeredBy\n  }\n}];"
+      },
+      "id": "e182c450-468a-4bc7-93b9-c5fe08f18af1",
+      "name": "Detect Trigger Source",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2240,
+        624
+      ]
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "combinator": "and",
+                "conditions": [
+                  {
+                    "id": "webhook-rule-id",
+                    "leftValue": "={{ $json.triggered_by }}",
+                    "operator": {
+                      "operation": "equals",
+                      "type": "string"
+                    },
+                    "rightValue": "webhook"
+                  }
+                ],
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                }
+              }
+            },
+            {
+              "conditions": {
+                "combinator": "and",
+                "conditions": [
+                  {
+                    "id": "orchestrator-rule-id",
+                    "leftValue": "={{ $json.triggered_by }}",
+                    "operator": {
+                      "operation": "equals",
+                      "type": "string"
+                    },
+                    "rightValue": "orchestrator"
+                  }
+                ],
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                }
+              }
+            },
+            {
+              "conditions": {
+                "combinator": "and",
+                "conditions": [
+                  {
+                    "id": "chat-rule-id",
+                    "leftValue": "={{ $json.triggered_by }}",
+                    "operator": {
+                      "operation": "equals",
+                      "type": "string"
+                    },
+                    "rightValue": "manual_chat"
+                  }
+                ],
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                }
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "7a78d9bb-0ab3-4e6b-bb44-306e214dfc43",
+      "name": "Route Response",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        2448,
+        624
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "allIncomingItems",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "id": "f68dc53f-24ab-4ef3-a1fc-af2d55b7f296",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        2448,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const inputData = $input.first()?.json || {};\n\nconst branchesExecuted = inputData.meta?.branches_executed || [];\nconst branchesFailed = inputData.meta?.branches_failed || [];\nconst branchStatus = inputData.meta?.branch_status || {};\nconst hasError = branchesFailed.length > 0 || !!inputData.error;\n\nreturn [{\n  json: {\n    status: hasError ? (branchesExecuted.length > 0 ? 'partial_success' : 'error') : 'success',\n    workflow: 'Credit Agent Workflow',\n    branches_executed: branchesExecuted,\n    branches_failed: branchesFailed,\n    branch_status: branchStatus,\n    report: inputData.output || '',\n    data: {\n      loan_recommendation: inputData.loan_recommendation || null,\n      affordability_verdict: inputData.affordability_verdict || null,\n      flagged_clauses: inputData.flagged_clauses || null,\n      prepay_vs_invest_comparison: inputData.prepay_vs_invest_comparison || null\n    },\n    timestamp: new Date().toISOString()\n  }\n}];"
+      },
+      "id": "60f7d818-e8e0-4608-a72b-d77cc79877a3",
+      "name": "Orchestrator Status Reply",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2448,
+        832
+      ],
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "model": "nomic-embed-text:latest"
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOllama",
+      "typeVersion": 1,
+      "position": [
+        1264,
+        464
+      ],
+      "id": "10ca64c6-700b-46eb-a2d4-e56f73a9fa86",
+      "name": "Embeddings Ollama",
+      "credentials": {
+        "ollamaApi": {
+          "id": "T43GuvQKUV87YHxj",
+          "name": "Ollama account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "nomic-embed-text:latest"
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOllama",
+      "typeVersion": 1,
+      "position": [
+        1168,
+        1088
+      ],
+      "id": "a07c5051-8856-4537-8418-f7143cee8f5f",
+      "name": "Embeddings Ollama1",
+      "credentials": {
+        "ollamaApi": {
+          "id": "T43GuvQKUV87YHxj",
+          "name": "Ollama account 2"
+        }
+      }
+    }
+  ],
+  "nodeGroups": [],
+  "activeVersion": {
+    "nodes": [
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "business_age",
+                "name": "business_age",
+                "type": "number",
+                "value": "={{ $json.business_age ?? $json.body?.business_age ?? 3 }}"
+              },
+              {
+                "id": "loan_purpose",
+                "name": "loan_purpose",
+                "type": "string",
+                "value": "={{ $json.loan_purpose || $json.body?.loan_purpose || 'Working capital expansion' }}"
+              },
+              {
+                "id": "amount_needed",
+                "name": "amount_needed",
+                "type": "number",
+                "value": "={{ $json.amount_needed ?? $json.body?.amount_needed ?? 1000000 }}"
+              },
+              {
+                "id": "collateral_available",
+                "name": "collateral_available",
+                "type": "string",
+                "value": "={{ $json.collateral_available || $json.body?.collateral_available || 'Property worth 1.5M' }}"
+              },
+              {
+                "id": "owner_category",
+                "name": "owner_category",
+                "type": "string",
+                "value": "={{ $json.owner_category || $json.body?.owner_category || 'MSME General' }}"
+              },
+              {
+                "id": "credit_score",
+                "name": "credit_score",
+                "type": "number",
+                "value": "={{ $json.credit_score ?? $json.body?.credit_score ?? 750 }}"
+              },
+              {
+                "id": "proposed_emi",
+                "name": "proposed_emi",
+                "type": "number",
+                "value": "={{ $json.proposed_emi ?? $json.body?.proposed_emi }}"
+              },
+              {
+                "id": "intent",
+                "name": "intent",
+                "type": "string",
+                "value": "={{ $json.chatInput || $json.intent || $json.body?.intent || 'Recommend loan options, check affordability, check contract clauses, and evaluate prepayment vs investment' }}"
+              }
+            ]
+          },
+          "includeOtherFields": true,
+          "options": {}
+        },
+        "id": "4297a48b-f3c4-4669-90c5-aea13dd6307f",
+        "name": "Set: Business Profile",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.5,
+        "position": [
+          288,
+          688
+        ]
+      },
+      {
+        "parameters": {
+          "promptType": "define",
+          "text": "=Business Profile:\n- Business Age: {{ $json.business_age }} years\n- Purpose: {{ $json.loan_purpose }}\n- Amount Needed: {{ $json.amount_needed }}\n- Collateral: {{ $json.collateral_available }}\n- Owner Category: {{ $json.owner_category }}\n- Credit Score: {{ $json.credit_score }}\n- User Intent: {{ $json.intent }}\n\nRecommend the single best-fit loan type for this business profile.",
+          "options": {
+            "systemMessage": "You are a credit advisor. Recommend the single best-fit loan type for this business profile using ONLY the retrieved context. Cite the specific circular/scheme/section for every claim. Explain benefits: leverage, tax deductibility, liquidity, CIBIL impact, and any scheme-specific perks. If the retrieved context doesn't cover the situation, say so explicitly rather than guessing."
+          }
+        },
+        "id": "e685689d-4c90-458b-9013-9d166c4a808b",
+        "name": "AI Agent: Loan Recommender",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "typeVersion": 3.1,
+        "position": [
+          1168,
+          176
+        ],
+        "onError": "continueRegularOutput"
+      },
+      {
+        "parameters": {
+          "mode": "retrieve-as-tool",
+          "toolDescription": "Search knowledge base of business loan schemes, circulars, and policies",
+          "pineconeIndex": {
+            "__rl": true,
+            "value": "loan",
+            "mode": "list",
+            "cachedResultName": "loan"
+          },
+          "topK": 6,
+          "options": {
+            "pineconeNamespace": "loan-recommender-docs"
+          }
+        },
+        "id": "cb0cd07e-e473-4ee2-b45c-de01c1d9aad3",
+        "name": "Vector DB Retrieval: Loan Recommender",
+        "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+        "typeVersion": 1.3,
+        "position": [
+          1264,
+          320
+        ],
+        "credentials": {
+          "pineconeApi": {
+            "id": "9EArayBGLvsHOMA9",
+            "name": "Pinecone account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "jsCode": "let intentText = '';\ntry {\n  intentText = $('Set: Business Profile').first()?.json?.intent || '';\n} catch (e) {}\n\nconst intentLower = intentText.toLowerCase();\n\nconst expectB1 = !intentLower || ['recommend', 'loan', 'option', 'best'].some(k => intentLower.includes(k));\nconst expectB2 = !intentLower || ['afford', 'emi', 'cash flow', 'stress'].some(k => intentLower.includes(k));\nconst expectB3 = !intentLower || ['contract', 'sanction', 'clause', 'charge', 'fee'].some(k => intentLower.includes(k));\nconst expectB4 = !intentLower || ['prepay', 'invest', 'lump', 'amortization'].some(k => intentLower.includes(k));\n\nlet f1Node = null;\nlet f2Node = null;\nlet f3Node = null;\nlet f4Node = null;\n\ntry { f1Node = $('AI Agent: Loan Recommender').first()?.json; } catch (e) {}\ntry { f2Node = $('Code: Stress Scenarios').first()?.json; } catch (e) {}\ntry { f3Node = $('AI Agent: Contract Checker').first()?.json; } catch (e) {}\ntry { f4Node = $('Code: Compare to Invest').first()?.json; } catch (e) {}\n\nconst b1Ready = !expectB1 || !!f1Node;\nconst b2Ready = !expectB2 || !!f2Node;\nconst b3Ready = !expectB3 || !!f3Node;\nconst b4Ready = !expectB4 || !!f4Node;\n\nif (!b1Ready || !b2Ready || !b3Ready || !b4Ready) {\n  return [];\n}\n\nlet loanRec = f1Node ? (f1Node.output || f1Node.loan_recommendation || f1Node) : null;\nlet affordability = f2Node ? (f2Node.affordability_verdict || f2Node) : null;\nlet flaggedClauses = f3Node ? (f3Node.output || f3Node.flagged_clauses || f3Node) : null;\nlet prepayVsInvest = f4Node ? (f4Node.prepay_vs_invest_comparison || f4Node) : null;\n\nreturn [{\n  json: {\n    loan_recommendation: loanRec,\n    affordability_verdict: affordability,\n    flagged_clauses: flaggedClauses,\n    prepay_vs_invest_comparison: prepayVsInvest\n  }\n}];"
+        },
+        "id": "26a16688-66df-4503-a0df-a40764c85597",
+        "name": "Merge Results",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          1824,
+          624
+        ]
+      },
+      {
+        "parameters": {
+          "url": "https://httpbin.org/get",
+          "options": {
+            "response": {
+              "response": {
+                "neverError": true
+              }
+            },
+            "timeout": 1000
+          }
+        },
+        "id": "2a9460fd-b1e4-4341-931a-a2d12d976299",
+        "name": "Fetch Bank Statement",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.5,
+        "position": [
+          1072,
+          624
+        ],
+        "onError": "continueRegularOutput"
+      },
+      {
+        "parameters": {
+          "jsCode": "const items = $input.all();\nlet transactions = [];\n\nfor (const item of items) {\n  if (item.json && item.json.transactions && Array.isArray(item.json.transactions)) {\n    transactions = item.json.transactions;\n  }\n}\n\nif (transactions.length === 0) {\n  transactions = [\n    { month: '2026-01', income: 500000, expense: 350000 },\n    { month: '2026-02', income: 520000, expense: 360000 },\n    { month: '2026-03', income: 480000, expense: 340000 },\n    { month: '2026-04', income: 510000, expense: 355000 },\n    { month: '2026-05', income: 530000, expense: 370000 },\n    { month: '2026-06', income: 490000, expense: 345000 }\n  ];\n}\n\nconst surpluses = transactions.map(t => (t.income || 0) - (t.expense || 0));\nconst totalSurplus = surpluses.reduce((a, b) => a + b, 0);\nconst avgSurplus = surpluses.length > 0 ? totalSurplus / surpluses.length : 0;\nconst minSurplus = surpluses.length > 0 ? Math.min(...surpluses) : 0;\nconst avgIncome = transactions.reduce((sum, t) => sum + (t.income || 0), 0) / (transactions.length || 1);\n\nreturn [{\n  json: {\n    monthly_transactions: transactions,\n    surpluses: surpluses,\n    average_monthly_income: Math.round(avgIncome),\n    average_monthly_surplus: Math.round(avgSurplus),\n    minimum_monthly_surplus: Math.round(minSurplus)\n  }\n}];"
+        },
+        "id": "37776b00-6b1a-4fd1-88c2-8375d2be1857",
+        "name": "Code: Calc Cash Flow",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          1248,
+          624
+        ]
+      },
+      {
+        "parameters": {
+          "jsCode": "const cashFlow = $input.first().json;\nlet profile = {};\ntry { profile = $('Set: Business Profile').first().json || {}; } catch(e) {}\n\nconst amountNeeded = Number(profile.amount_needed) || 1000000;\nconst proposedEmi = Number(profile.proposed_emi) || Math.round(amountNeeded * 0.025);\n\nconst avgSurplus = cashFlow.average_monthly_surplus || 150000;\nconst avgIncome = cashFlow.average_monthly_income || 500000;\n\nconst revDrop20Surplus = Math.round(avgSurplus - (avgIncome * 0.20));\nconst revDrop30Surplus = Math.round(avgSurplus - (avgIncome * 0.30));\nconst delay30DaysSurplus = Math.round(avgSurplus * 0.70);\nconst shockExpenseSurplus = Math.round(avgSurplus - 50000);\n\nconst scenarios = {\n  baseline_surplus: avgSurplus,\n  revenue_minus_20pct: revDrop20Surplus,\n  revenue_minus_30pct: revDrop30Surplus,\n  payment_delay_30days: delay30DaysSurplus,\n  unexpected_expense_shock: shockExpenseSurplus\n};\n\nlet verdict = 'affordable';\nlet failedScenarios = [];\n\nif (proposedEmi > avgSurplus) {\n  verdict = 'not_affordable';\n  failedScenarios.push('Baseline surplus exceeded by proposed EMI');\n} else {\n  if (proposedEmi > revDrop20Surplus) failedScenarios.push('Revenue -20% stress test');\n  if (proposedEmi > revDrop30Surplus) failedScenarios.push('Revenue -30% stress test');\n  if (proposedEmi > delay30DaysSurplus) failedScenarios.push('30-day payment delay stress test');\n  if (proposedEmi > shockExpenseSurplus) failedScenarios.push('Unexpected expense shock test');\n\n  if (failedScenarios.length >= 3) {\n    verdict = 'not_affordable';\n  } else if (failedScenarios.length >= 1) {\n    verdict = 'risky';\n  }\n}\n\nconst suggestedEmiCeiling = Math.max(0, Math.round(Math.min(avgSurplus * 0.6, revDrop20Surplus * 0.8)));\n\nreturn [{\n  json: {\n    affordability_verdict: {\n      proposed_emi: proposedEmi,\n      verdict: verdict,\n      suggested_emi_ceiling: suggestedEmiCeiling,\n      stress_test_results: scenarios,\n      failed_stress_tests: failedScenarios\n    }\n  }\n}];"
+        },
+        "id": "57b97de5-8ddd-488f-890c-4f8e1040db9a",
+        "name": "Code: Stress Scenarios",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          1424,
+          624
+        ]
+      },
+      {
+        "parameters": {
+          "operation": "pdf",
+          "options": {}
+        },
+        "id": "4b917d5b-2536-4252-b4bc-147087803379",
+        "name": "Extract PDF",
+        "type": "n8n-nodes-base.extractFromFile",
+        "typeVersion": 1.1,
+        "position": [
+          896,
+          800
+        ],
+        "onError": "continueRegularOutput"
+      },
+      {
+        "parameters": {
+          "promptType": "define",
+          "text": "=Extracted Contract Text:\n{{ $json.text || $json.data || 'Sample contract: Processing fee 3.5%, Prepayment penalty 4%, Floating rate with 5% conversion fee.' }}\n\nCompare this contract against regulatory norms.",
+          "options": {
+            "systemMessage": "Compare this loan contract's terms against the retrieved regulatory norms. Flag: processing fees above typical market rate, prepayment/foreclosure penalties, teaser rates, floating-vs-fixed conversion clauses, late payment/bounce charges, bundled insurance. For each flag, quote the specific contract clause and explain the risk in plain language. Cite the regulatory source for what 'normal' looks like."
+          }
+        },
+        "id": "deff42d7-679d-49d5-8b4a-87fd5e2db66a",
+        "name": "AI Agent: Contract Checker",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "typeVersion": 3.1,
+        "position": [
+          1072,
+          800
+        ],
+        "onError": "continueRegularOutput"
+      },
+      {
+        "parameters": {
+          "mode": "retrieve-as-tool",
+          "toolDescription": "Search RBI Fair Practices Code and Key Fact Statement regulatory norms",
+          "pineconeIndex": {
+            "__rl": true,
+            "value": "loan",
+            "mode": "list",
+            "cachedResultName": "loan"
+          },
+          "topK": 6,
+          "options": {
+            "pineconeNamespace": "fair-practices-docs"
+          }
+        },
+        "id": "2b76ba43-1e6d-427c-942c-81d2b8b56b5d",
+        "name": "Vector DB Norms Retrieval",
+        "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+        "typeVersion": 1.3,
+        "position": [
+          1168,
+          944
+        ],
+        "credentials": {
+          "pineconeApi": {
+            "id": "9EArayBGLvsHOMA9",
+            "name": "Pinecone account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "principal_remaining",
+                "name": "principal_remaining",
+                "value": "={{ $json.principal_remaining || 1000000 }}",
+                "type": "number"
+              },
+              {
+                "id": "interest_rate",
+                "name": "interest_rate",
+                "value": "={{ $json.interest_rate || 12 }}",
+                "type": "number"
+              },
+              {
+                "id": "tenure_remaining_months",
+                "name": "tenure_remaining_months",
+                "value": "={{ $json.tenure_remaining_months || 36 }}",
+                "type": "number"
+              },
+              {
+                "id": "lump_sum_available",
+                "name": "lump_sum_available",
+                "value": "={{ $json.lump_sum_available || 300000 }}",
+                "type": "number"
+              },
+              {
+                "id": "expected_investment_return_rate",
+                "name": "expected_investment_return_rate",
+                "value": "={{ $json.expected_investment_return_rate || 10 }}",
+                "type": "number"
+              }
+            ]
+          },
+          "includeOtherFields": true,
+          "options": {}
+        },
+        "id": "8b221e4b-eb12-45a0-ad35-c21b1c09342c",
+        "name": "Loan Terms Input",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.5,
+        "position": [
+          1088,
+          1264
+        ]
+      },
+      {
+        "parameters": {
+          "jsCode": "const input = $input.first().json;\nconst principal = Number(input.principal_remaining) || 1000000;\nconst annualRate = Number(input.interest_rate) || 12;\nconst monthlyRate = annualRate / 12 / 100;\nconst totalMonths = Number(input.tenure_remaining_months) || 36;\nconst lumpSum = Number(input.lump_sum_available) || 300000;\n\nconst emi = principal * (monthlyRate * Math.pow(1 + monthlyRate, totalMonths)) / (Math.pow(1 + monthlyRate, totalMonths) - 1);\nconst totalPaymentNoPrepay = emi * totalMonths;\nconst totalInterestNoPrepay = totalPaymentNoPrepay - principal;\n\nconst newPrincipal = Math.max(0, principal - lumpSum);\nlet totalInterestWithPrepay = 0;\nlet monthsWithPrepay = 0;\nlet currentBalance = newPrincipal;\n\nwhile (currentBalance > 0 && monthsWithPrepay < totalMonths) {\n  const interestForMonth = currentBalance * monthlyRate;\n  const principalForMonth = Math.min(currentBalance, emi - interestForMonth);\n  totalInterestWithPrepay += interestForMonth;\n  currentBalance -= principalForMonth;\n  monthsWithPrepay++;\n}\n\nconst interestSaved = Math.round(totalInterestNoPrepay - totalInterestWithPrepay);\nconst tenureReducedMonths = totalMonths - monthsWithPrepay;\n\nreturn [{\n  json: {\n    principal_remaining: principal,\n    interest_rate: annualRate,\n    tenure_remaining_months: totalMonths,\n    lump_sum_applied: lumpSum,\n    monthly_emi: Math.round(emi),\n    baseline_total_interest: Math.round(totalInterestNoPrepay),\n    prepaid_total_interest: Math.round(totalInterestWithPrepay),\n    interest_saved: interestSaved,\n    original_tenure_months: totalMonths,\n    new_tenure_months: monthsWithPrepay,\n    tenure_reduced_months: tenureReducedMonths\n  }\n}];"
+        },
+        "id": "ed83a5b8-7b08-4b4c-9c90-1d170c52090d",
+        "name": "Code: Amortization Calc",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          1264,
+          1264
+        ]
+      },
+      {
+        "parameters": {
+          "jsCode": "const prepay = $input.first().json;\nlet termsInput = {};\ntry { termsInput = $('Loan Terms Input').first().json || {}; } catch(e) {}\n\nconst lumpSum = prepay.lump_sum_applied || Number(termsInput.lump_sum_available) || 300000;\nconst returnRate = Number(termsInput.expected_investment_return_rate) || 10;\nconst horizonYears = (prepay.original_tenure_months || 36) / 12;\n\nconst futureValueInvestment = lumpSum * Math.pow(1 + (returnRate / 100), horizonYears);\nconst investmentGain = Math.round(futureValueInvestment - lumpSum);\nconst interestSavedPrepayment = prepay.interest_saved || 0;\n\nlet recommendation = '';\nif (interestSavedPrepayment > investmentGain) {\n  recommendation = 'Prepayment provides guaranteed higher savings than expected investment return.';\n} else {\n  recommendation = 'Investment projected return is higher, but carries market risk; prepayment savings are 100% guaranteed risk-free.';\n}\n\nreturn [{\n  json: {\n    prepay_vs_invest_comparison: {\n      lump_sum_amount: lumpSum,\n      time_horizon_years: horizonYears,\n      prepayment: {\n        interest_saved_guaranteed: interestSavedPrepayment,\n        tenure_reduced_months: prepay.tenure_reduced_months\n      },\n      investment: {\n        expected_annual_return_pct: returnRate,\n        projected_investment_gain: investmentGain,\n        projected_total_value: Math.round(futureValueInvestment)\n      },\n      net_difference: Math.abs(interestSavedPrepayment - investmentGain),\n      recommendation: recommendation,\n      risk_disclaimer: 'Note: Investment returns are subject to market risks and not guaranteed. Loan prepayment savings represent a guaranteed, tax-free return on capital equal to the loan interest rate.'\n    }\n  }\n}];"
+        },
+        "id": "4b959f01-e05e-4d82-bacc-efaebe187452",
+        "name": "Code: Compare to Invest",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          1440,
+          1264
+        ]
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "output-report",
+                "name": "output",
+                "value": "={{ '## Credit Agent Advisory Report\\n\\n' + ($json.affordability_verdict ? ('### Cash Flow Affordability\\n- Verdict: ' + $json.affordability_verdict.verdict + '\\n- Proposed EMI: ₹' + $json.affordability_verdict.proposed_emi + '\\n- Suggested Ceiling: ₹' + $json.affordability_verdict.suggested_emi_ceiling + '\\n\\n') : '') + ($json.prepay_vs_invest_comparison ? ('### Prepayment vs Investment\\n- Lump Sum: ₹' + $json.prepay_vs_invest_comparison.lump_sum_amount + '\\n- Interest Saved: ₹' + $json.prepay_vs_invest_comparison.prepayment.interest_saved_guaranteed + '\\n- Recommendation: ' + $json.prepay_vs_invest_comparison.recommendation + '\\n\\n') : '') + ($json.loan_recommendation ? ('### Loan Recommendation\\n' + (typeof $json.loan_recommendation === 'string' ? $json.loan_recommendation : JSON.stringify($json.loan_recommendation)) + '\\n\\n') : '') + ($json.flagged_clauses ? ('### Contract Audit\\n' + (typeof $json.flagged_clauses === 'string' ? $json.flagged_clauses : JSON.stringify($json.flagged_clauses)) + '\\n\\n') : '') }}",
+                "type": "string"
+              }
+            ]
+          },
+          "includeOtherFields": true,
+          "options": {}
+        },
+        "id": "5aaf54df-f210-4448-9c5f-94c05d15c5f5",
+        "name": "Format Report",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.5,
+        "position": [
+          2016,
+          624
+        ]
+      },
+      {
+        "parameters": {
+          "model": {
+            "__rl": true,
+            "mode": "list",
+            "value": "gemini/gemini-3.6-flash"
+          },
+          "options": {}
+        },
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "typeVersion": 1.2,
+        "position": [
+          1168,
+          384
+        ],
+        "id": "855b6358-dcd9-436c-86b2-c594f3604774",
+        "name": "9router Chat Model1",
+        "credentials": {
+          "openAiApi": {
+            "id": "pBG122sA6PR3GtIL",
+            "name": "OpenAI account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "model": {
+            "__rl": true,
+            "mode": "list",
+            "value": "gemini/gemini-3.6-flash"
+          },
+          "options": {}
+        },
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "typeVersion": 1.2,
+        "position": [
+          1072,
+          1008
+        ],
+        "id": "bc209115-7f84-4bb3-89dc-8b2dbf4cfaf3",
+        "name": "9router Chat Model",
+        "credentials": {
+          "openAiApi": {
+            "id": "pBG122sA6PR3GtIL",
+            "name": "OpenAI account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "rules": {
+            "values": [
+              {
+                "conditions": {
+                  "combinator": "or",
+                  "conditions": [
+                    {
+                      "id": "b75cb20c-4287-48c7-a0c0-5f897a84a87c",
+                      "leftValue": "={{ $json.intent }}",
+                      "operator": {
+                        "operation": "contains",
+                        "type": "string"
+                      },
+                      "rightValue": "recommend"
+                    },
+                    {
+                      "id": "2311a657-85f3-41b2-b051-7eb2dbae8d84",
+                      "leftValue": "={{ $json.intent }}",
+                      "operator": {
+                        "operation": "contains",
+                        "type": "string"
+                      },
+                      "rightValue": "loan"
+                    },
+                    {
+                      "id": "994fcb0b-3806-4076-a59e-55d45f57cb3f",
+                      "leftValue": "={{ $json.intent }}",
+                      "operator": {
+                        "operation": "contains",
+                        "type": "string"
+                      },
+                      "rightValue": "option"
+                    },
+                    {
+                      "id": "530860bb-cf73-4886-84d2-0ffd7ab8e932",
+                      "leftValue": "={{ $json.intent }}",
+                      "operator": {
+                        "operation": "contains",
+                        "type": "string"
+                      },
+                      "rightValue": "best"
+                    }
+                  ],
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 3
+                  }
+                }
+              },
+              {
+                "conditions": {
+                  "combinator": "or",
+                  "conditions": [
+                    {
+                      "id": "2f2b0772-d615-4967-a8e9-6ee78faac9b3",
+                      "leftValue": "={{ $json.intent }}",
+                      "operator": {
+                        "operation": "contains",
+                        "type": "string"
+                      },
+                      "rightValue": "afford"
+                    },
+                    {
+                      "id": "defa59ff-dfa3-4e37-9455-cfec26278a7e",
+                      "leftValue": "={{ $json.intent }}",
+                      "operator": {
+                        "operation": "contains",
+                        "type": "string"
+                      },
+                      "rightValue": "emi"
+                    },
+                    {
+                      "id": "31e793b1-31a7-4329-8320-8ee821845780",
+                      "leftValue": "={{ $json.intent }}",
+                      "operator": {
+                        "operation": "contains",
+                        "type": "string"
+                      },
+                      "rightValue": "cash flow"
+                    },
+                    {
+                      "id": "6806cf7a-c03d-44e0-bfe8-2f0bd80b365f",
+                      "leftValue": "={{ $json.intent }}",
+                      "operator": {
+                        "operation": "contains",
+                        "type": "string"
+                      },
+                      "rightValue": "stress"
+                    }
+                  ],
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 3
+                  }
+                }
+              },
+              {
+                "conditions": {
+                  "combinator": "or",
+                  "conditions": [
+                    {
+                      "id": "4b9ef2b7-a461-4528-84e3-1e2aaf494697",
+                      "leftValue": "={{ $json.intent }}",
+                      "operator": {
+                        "operation": "contains",
+                        "type": "string"
+                      },
+                      "rightValue": "contract"
+                    },
+                    {
+                      "id": "af1b0a06-9955-4218-98c5-6eb3b21f84eb",
+                      "leftValue": "={{ $json.intent }}",
+                      "operator": {
+                        "operation": "contains",
+                        "type": "string"
+                      },
+                      "rightValue": "sanction"
+                    },
+                    {
+                      "id": "d7be929e-c64c-4a79-a804-ef66d60cb5fe",
+                      "leftValue": "={{ $json.intent }}",
+                      "operator": {
+                        "operation": "contains",
+                        "type": "string"
+                      },
+                      "rightValue": "clause"
+                    },
+                    {
+                      "id": "ca3b2a1d-10da-4abe-b1d8-3ae1804cf06a",
+                      "leftValue": "={{ $json.intent }}",
+                      "operator": {
+                        "operation": "contains",
+                        "type": "string"
+                      },
+                      "rightValue": "charge"
+                    },
+                    {
+                      "id": "0b86abe1-4033-4d59-adc9-9f89fe83b25a",
+                      "leftValue": "={{ $json.intent }}",
+                      "operator": {
+                        "operation": "contains",
+                        "type": "string"
+                      },
+                      "rightValue": "fee"
+                    }
+                  ],
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 3
+                  }
+                }
+              },
+              {
+                "conditions": {
+                  "combinator": "or",
+                  "conditions": [
+                    {
+                      "id": "ad045da5-a62c-4398-b943-c2bd01995206",
+                      "leftValue": "={{ $json.intent }}",
+                      "operator": {
+                        "operation": "contains",
+                        "type": "string"
+                      },
+                      "rightValue": "prepay"
+                    },
+                    {
+                      "id": "e0ab1d56-e981-4eb6-bded-9375055574c1",
+                      "leftValue": "={{ $json.intent }}",
+                      "operator": {
+                        "operation": "contains",
+                        "type": "string"
+                      },
+                      "rightValue": "invest"
+                    },
+                    {
+                      "id": "21911ca8-e4f1-4e27-abab-d69886d59131",
+                      "leftValue": "={{ $json.intent }}",
+                      "operator": {
+                        "operation": "contains",
+                        "type": "string"
+                      },
+                      "rightValue": "lump"
+                    },
+                    {
+                      "id": "d7465f01-24fa-4d8a-a831-ae9facfb51b9",
+                      "leftValue": "={{ $json.intent }}",
+                      "operator": {
+                        "operation": "contains",
+                        "type": "string"
+                      },
+                      "rightValue": "amortization"
+                    }
+                  ],
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 3
+                  }
+                }
+              }
+            ]
+          },
+          "options": {
+            "allMatchingOutputs": true
+          }
+        },
+        "id": "bf349a09-95f8-4608-8926-b67890d537a2",
+        "name": "Switch Router",
+        "type": "n8n-nodes-base.switch",
+        "typeVersion": 3.4,
+        "position": [
+          448,
+          656
+        ]
+      },
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "credit-agent",
+          "responseMode": "responseNode",
+          "options": {}
+        },
+        "id": "d63ac00e-d224-44b8-9077-1348b853828b",
+        "name": "Webhook Trigger",
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2,
+        "position": [
+          48,
+          608
+        ],
+        "webhookId": "147bb83c-449a-47c7-9ccf-ca761876255a"
+      },
+      {
+        "parameters": {},
+        "id": "3852aada-c1d8-4e63-bda3-ed38755f907c",
+        "name": "Execute Workflow Trigger",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "typeVersion": 1,
+        "position": [
+          48,
+          768
+        ]
+      },
+      {
+        "parameters": {
+          "jsCode": "let triggeredBy = 'manual_chat';\n\ntry {\n  if ($('Webhook Trigger').first()?.json) {\n    triggeredBy = 'webhook';\n  }\n} catch (e) {}\n\nif (triggeredBy === 'manual_chat') {\n  try {\n    if ($('Execute Workflow Trigger').first()?.json) {\n      triggeredBy = 'orchestrator';\n    }\n  } catch (e) {}\n}\n\nif (triggeredBy === 'manual_chat' && $execution.mode === 'webhook') {\n  triggeredBy = 'webhook';\n}\n\nconst item = $input.first()?.json || {};\n\nreturn [{\n  json: {\n    ...item,\n    triggered_by: triggeredBy\n  }\n}];"
+        },
+        "id": "e182c450-468a-4bc7-93b9-c5fe08f18af1",
+        "name": "Detect Trigger Source",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          2240,
+          624
+        ]
+      },
+      {
+        "parameters": {
+          "rules": {
+            "values": [
+              {
+                "conditions": {
+                  "combinator": "and",
+                  "conditions": [
+                    {
+                      "id": "webhook-rule-id",
+                      "leftValue": "={{ $json.triggered_by }}",
+                      "operator": {
+                        "operation": "equals",
+                        "type": "string"
+                      },
+                      "rightValue": "webhook"
+                    }
+                  ],
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 3
+                  }
+                }
+              },
+              {
+                "conditions": {
+                  "combinator": "and",
+                  "conditions": [
+                    {
+                      "id": "orchestrator-rule-id",
+                      "leftValue": "={{ $json.triggered_by }}",
+                      "operator": {
+                        "operation": "equals",
+                        "type": "string"
+                      },
+                      "rightValue": "orchestrator"
+                    }
+                  ],
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 3
+                  }
+                }
+              },
+              {
+                "conditions": {
+                  "combinator": "and",
+                  "conditions": [
+                    {
+                      "id": "chat-rule-id",
+                      "leftValue": "={{ $json.triggered_by }}",
+                      "operator": {
+                        "operation": "equals",
+                        "type": "string"
+                      },
+                      "rightValue": "manual_chat"
+                    }
+                  ],
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 3
+                  }
+                }
+              }
+            ]
+          },
+          "options": {}
+        },
+        "id": "7a78d9bb-0ab3-4e6b-bb44-306e214dfc43",
+        "name": "Route Response",
+        "type": "n8n-nodes-base.switch",
+        "typeVersion": 3.4,
+        "position": [
+          2448,
+          624
+        ]
+      },
+      {
+        "parameters": {
+          "respondWith": "allIncomingItems",
+          "options": {
+            "responseCode": 200
+          }
+        },
+        "id": "f68dc53f-24ab-4ef3-a1fc-af2d55b7f296",
+        "name": "Respond to Webhook",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1.1,
+        "position": [
+          2448,
+          480
+        ]
+      },
+      {
+        "parameters": {
+          "jsCode": "const inputData = $input.first()?.json || {};\n\nconst branchesExecuted = [];\nif (inputData.loan_recommendation) branchesExecuted.push('loan_recommendation');\nif (inputData.affordability_verdict) branchesExecuted.push('affordability_verdict');\nif (inputData.flagged_clauses) branchesExecuted.push('flagged_clauses');\nif (inputData.prepay_vs_invest_comparison) branchesExecuted.push('prepay_vs_invest_comparison');\n\nconst hasError = !!inputData.error;\n\nreturn [{\n  json: {\n    status: hasError ? 'error' : 'success',\n    workflow: 'Credit Agent Workflow',\n    branches_executed: branchesExecuted,\n    report: inputData.output || '',\n    data: {\n      loan_recommendation: inputData.loan_recommendation || null,\n      affordability_verdict: inputData.affordability_verdict || null,\n      flagged_clauses: inputData.flagged_clauses || null,\n      prepay_vs_invest_comparison: inputData.prepay_vs_invest_comparison || null\n    },\n    timestamp: new Date().toISOString()\n  }\n}];"
+        },
+        "id": "60f7d818-e8e0-4608-a72b-d77cc79877a3",
+        "name": "Orchestrator Status Reply",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          2448,
+          832
+        ],
+        "onError": "continueRegularOutput"
+      },
+      {
+        "parameters": {
+          "model": "nomic-embed-text:latest"
+        },
+        "type": "@n8n/n8n-nodes-langchain.embeddingsOllama",
+        "typeVersion": 1,
+        "position": [
+          1264,
+          464
+        ],
+        "id": "10ca64c6-700b-46eb-a2d4-e56f73a9fa86",
+        "name": "Embeddings Ollama",
+        "credentials": {
+          "ollamaApi": {
+            "id": "T43GuvQKUV87YHxj",
+            "name": "Ollama account 2"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "model": "nomic-embed-text:latest"
+        },
+        "type": "@n8n/n8n-nodes-langchain.embeddingsOllama",
+        "typeVersion": 1,
+        "position": [
+          1168,
+          1088
+        ],
+        "id": "a07c5051-8856-4537-8418-f7143cee8f5f",
+        "name": "Embeddings Ollama1",
+        "credentials": {
+          "ollamaApi": {
+            "id": "T43GuvQKUV87YHxj",
+            "name": "Ollama account 2"
+          }
+        }
+      }
+    ],
+    "connections": {
+      "AI Agent: Loan Recommender": {
+        "main": [
+          [
+            {
+              "node": "Merge Results",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Vector DB Retrieval: Loan Recommender": {
+        "ai_tool": [
+          [
+            {
+              "node": "AI Agent: Loan Recommender",
+              "type": "ai_tool",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Merge Results": {
+        "main": [
+          [
+            {
+              "node": "Format Report",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Fetch Bank Statement": {
+        "main": [
+          [
+            {
+              "node": "Code: Calc Cash Flow",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Code: Calc Cash Flow": {
+        "main": [
+          [
+            {
+              "node": "Code: Stress Scenarios",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Code: Stress Scenarios": {
+        "main": [
+          [
+            {
+              "node": "Merge Results",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Extract PDF": {
+        "main": [
+          [
+            {
+              "node": "AI Agent: Contract Checker",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "AI Agent: Contract Checker": {
+        "main": [
+          [
+            {
+              "node": "Merge Results",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Vector DB Norms Retrieval": {
+        "ai_tool": [
+          [
+            {
+              "node": "AI Agent: Contract Checker",
+              "type": "ai_tool",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Loan Terms Input": {
+        "main": [
+          [
+            {
+              "node": "Code: Amortization Calc",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Code: Amortization Calc": {
+        "main": [
+          [
+            {
+              "node": "Code: Compare to Invest",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Code: Compare to Invest": {
+        "main": [
+          [
+            {
+              "node": "Merge Results",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "9router Chat Model1": {
+        "ai_languageModel": [
+          [
+            {
+              "node": "AI Agent: Loan Recommender",
+              "type": "ai_languageModel",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "9router Chat Model": {
+        "ai_languageModel": [
+          [
+            {
+              "node": "AI Agent: Contract Checker",
+              "type": "ai_languageModel",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Set: Business Profile": {
+        "main": [
+          [
+            {
+              "node": "Switch Router",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Switch Router": {
+        "main": [
+          [
+            {
+              "node": "AI Agent: Loan Recommender",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Fetch Bank Statement",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Extract PDF",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Loan Terms Input",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Webhook Trigger": {
+        "main": [
+          [
+            {
+              "node": "Set: Business Profile",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Execute Workflow Trigger": {
+        "main": [
+          [
+            {
+              "node": "Set: Business Profile",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Format Report": {
+        "main": [
+          [
+            {
+              "node": "Detect Trigger Source",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Detect Trigger Source": {
+        "main": [
+          [
+            {
+              "node": "Route Response",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Route Response": {
+        "main": [
+          [
+            {
+              "node": "Respond to Webhook",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Orchestrator Status Reply",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Embeddings Ollama": {
+        "ai_embedding": [
+          [
+            {
+              "node": "Vector DB Retrieval: Loan Recommender",
+              "type": "ai_embedding",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Embeddings Ollama1": {
+        "ai_embedding": [
+          [
+            {
+              "node": "Vector DB Norms Retrieval",
+              "type": "ai_embedding",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "nodeGroups": []
+  },
+  "tags": [],
+  "meta": {
+    "aiBuilderAssisted": true,
+    "builderVariant": "mcp",
+    "templateCredsSetupCompleted": true
+  },
+  "parentFolderId": null,
+  "description": "Business loan decision-support workflow with intent-based routing across 4 analytical branches (Loan RAG, Affordability Stress-test, Contract audit, Prepayment vs Invest).",
+  "scopes": [
+    "execution:reveal",
+    "workflow:create",
+    "workflow:delete",
+    "workflow:disableRedaction",
+    "workflow:enableRedaction",
+    "workflow:execute",
+    "workflow:execute-chat",
+    "workflow:export",
+    "workflow:import",
+    "workflow:list",
+    "workflow:move",
+    "workflow:publish",
+    "workflow:read",
+    "workflow:share",
+    "workflow:unpublish",
+    "workflow:unshare",
+    "workflow:update"
+  ],
+  "canExecute": true
+}
