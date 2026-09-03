@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CreditAgent AI — Voice & Advisory Dashboard</title>
+  <meta name="description" content="AI-powered MSME Credit Advisor with Browser Voice Interaction, Cash Flow Stress-Testing, and Regulatory RAG Auditing.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <!-- Ambient Glow Blobs -->
+  <div class="ambient-glow glow-emerald"></div>
+  <div class="ambient-glow glow-cobalt"></div>
+
+  <!-- Main Container -->
+  <div class="app-container">
+    
+    <!-- Top Navigation Bar -->
+    <header class="top-navbar glass-card">
+      <div class="brand">
+        <div class="brand-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-title">CreditAgent<span class="highlight">.AI</span></span>
+          <span class="brand-subtitle">Autonomous MSME Underwriting</span>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <!-- Live Webhook Status Pill -->
+        <div class="status-pill" id="webhookStatusPill" title="Target n8n Webhook Status">
+          <span class="pulse-dot"></span>
+          <span id="webhookStatusText">Live Webhook Connected</span>
+        </div>
+
+        <!-- TTS Voice Selector -->
+        <div class="voice-selector-wrap">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+          </svg>
+          <select id="voiceSelect" aria-label="Select AI Voice"></select>
+        </div>
+
+        <!-- Settings Button -->
+        <button class="icon-btn" id="openSettingsBtn" title="Webhook & API Settings" aria-label="Settings">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Voice Orb Hero Section -->
+    <section class="hero-section">
+      <div class="voice-orb-container">
+        <!-- Visualizer Rings -->
+        <div class="visualizer-wave wave-3"></div>
+        <div class="visualizer-wave wave-2"></div>
+        <div class="visualizer-wave wave-1"></div>
+        
+        <!-- Glowing Center Core Orb -->
+        <div class="voice-orb" id="voiceOrb" title="AI Voice Status">
+          <div class="orb-inner"></div>
+        </div>
+      </div>
+
+      <div class="voice-action-wrap">
+        <button class="mic-button" id="micBtn" aria-label="Toggle Microphone">
+          <svg class="mic-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+            <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+            <line x1="12" y1="19" x2="12" y2="23"></line>
+            <line x1="8" y1="23" x2="16" y2="23"></line>
+          </svg>
+          <span class="mic-btn-text" id="micBtnText">Tap to Speak with Credit Agent</span>
+        </button>
+
+        <button class="stop-audio-btn" id="stopAudioBtn" style="display:none;" title="Stop Voice Playback">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+            <rect x="4" y="4" width="16" height="16" rx="2"></rect>
+          </svg>
+          <span>Stop Speaking</span>
+        </button>
+      </div>
+
+      <!-- Live Transcript Stream -->
+      <div class="transcript-feed glass-card" id="transcriptFeed">
+        <span class="transcript-badge">AI Speech Recognition</span>
+        <p class="transcript-text" id="transcriptText">"Speak or select a scenario below to analyze loan eligibility, cash flow stress, and contracts..."</p>
+      </div>
+
+      <!-- Quick Scenario Pills -->
+      <div class="scenario-pills">
+        <button class="scenario-pill" data-scenario="affordability">
+          <span class="pill-icon">📊</span>
+          <span>Check ₹10L Affordability</span>
+        </button>
+        <button class="scenario-pill" data-scenario="prepayment">
+          <span class="pill-icon">💰</span>
+          <span>Prepayment vs Invest ₹3L</span>
+        </button>
+        <button class="scenario-pill" data-scenario="statutory">
+          <span class="pill-icon">🏛️</span>
+          <span>Collateral-Free MSE Facility</span>
+        </button>
+        <button class="scenario-pill" data-scenario="contract">
+          <span class="pill-icon">⚖️</span>
+          <span>Audit Sanction Letter</span>
+        </button>
+        <button class="scenario-pill pill-active" data-scenario="all">
+          <span class="pill-icon">⚡</span>
+          <span>Full 4-Branch Evaluation</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Query Input Bar -->
+    <div class="input-container glass-card">
+      <div class="input-row">
+        <input type="text" id="userQueryInput" class="query-input" placeholder="Ask a credit advisory question, describe your business profile, or paste loan terms..." value="Recommend loan options, check affordability for ₹25,000 EMI, check contract clauses, and evaluate ₹3L prepayment vs investment.">
+        
+        <div class="input-actions">
+          <button class="secondary-action-btn" id="toggleParamsBtn" title="Customize Financial Parameters">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="4" y1="21" x2="4" y2="14"></line>
+              <line x1="4" y1="10" x2="4" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12" y2="3"></line>
+              <line x1="20" y1="21" x2="20" y2="16"></line>
+              <line x1="20" y1="12" x2="20" y2="3"></line>
+              <line x1="1" y1="14" x2="7" y2="14"></line>
+              <line x1="9" y1="8" x2="15" y2="8"></line>
+              <line x1="17" y1="16" x2="23" y2="16"></line>
+            </svg>
+            <span>Parameters</span>
+          </button>
+
+          <button class="primary-action-btn" id="analyzeBtn">
+            <span id="analyzeBtnText">Analyze Credit</span>
+            <div class="btn-spinner" id="analyzeSpinner" style="display:none;"></div>
+          </button>
+        </div>
+      </div>
+
+      <!-- Expandable Financial Parameters Drawer -->
+      <div class="params-drawer" id="paramsDrawer" style="display:none;">
+        <div class="params-grid">
+          <div class="param-group">
+            <label for="paramAmount">Loan Amount (₹)</label>
+            <input type="number" id="paramAmount" value="1000000" step="50000">
+          </div>
+          <div class="param-group">
+            <label for="paramEmi">Proposed EMI (₹)</label>
+            <input type="number" id="paramEmi" value="25000" step="1000">
+          </div>
+          <div class="param-group">
+            <label for="paramRate">Interest Rate (%)</label>
+            <input type="number" id="paramRate" value="12" step="0.5">
+          </div>
+          <div class="param-group">
+            <label for="paramTenure">Tenure (Months)</label>
+            <input type="number" id="paramTenure" value="36" step="6">
+          </div>
+          <div class="param-group">
+            <label for="paramLumpSum">Lump Sum (₹)</label>
+            <input type="number" id="paramLumpSum" value="300000" step="50000">
+          </div>
+          <div class="param-group">
+            <label for="paramInvestRate">Expected Invest Rate (%)</label>
+            <input type="number" id="paramInvestRate" value="10" step="0.5">
+          </div>
+          <div class="param-group">
+            <label for="paramBusinessAge">Business Vintage (Yrs)</label>
+            <input type="number" id="paramBusinessAge" value="3">
+          </div>
+          <div class="param-group">
+            <label for="paramTaxRate">Tax Shield Bracket</label>
+            <select id="paramTaxRate">
+              <option value="0.25">25% (MSME Corporate)</option>
+              <option value="0.30">30% (Standard Corporate)</option>
+              <option value="0.20">20% (Lower Slab)</option>
+              <option value="0">0% (No Tax Shield)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Results Section: 4 Dynamic Advisory Cards -->
+    <main class="results-grid" id="resultsGrid">
+      
+      <!-- 1. Cash Flow Affordability Card -->
+      <article class="advisory-card glass-card" id="cardAffordability">
+        <div class="card-header">
+          <div class="card-title-group">
+            <div class="card-icon icon-emerald">📊</div>
+            <div>
+              <h2 class="card-title">Cash Flow Affordability</h2>
+              <span class="card-subtitle">5-Shock Stress Testing Engine</span>
+            </div>
+          </div>
+          <span class="verdict-badge badge-pending" id="badgeAffordability">Pending</span>
+        </div>
+
+        <div class="card-body">
+          <div class="metric-row">
+            <div class="metric-box">
+              <span class="metric-label">Proposed Monthly EMI</span>
+              <span class="metric-value" id="valProposedEmi">₹25,000</span>
+            </div>
+            <div class="metric-box">
+              <span class="metric-label">Suggested Safe Ceiling</span>
+              <span class="metric-value highlight-green" id="valCeilingEmi">₹40,534</span>
+            </div>
+            <div class="metric-box">
+              <span class="metric-label">DSCR Proxy</span>
+              <span class="metric-value" id="valDscr">6.0x</span>
+            </div>
+          </div>
+
+          <!-- Stress Testing Table -->
+          <div class="table-wrap">
+            <table class="stress-table">
+              <thead>
+                <tr>
+                  <th>Stress Shock</th>
+                  <th>Monthly Surplus</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="tableStressBody">
+                <tr><td>Baseline Surplus</td><td>₹1,50,000</td><td><span class="status-pass">✅ Pass</span></td></tr>
+                <tr><td>Revenue Drop -20%</td><td>₹50,000</td><td><span class="status-pass">✅ Pass</span></td></tr>
+                <tr><td>Revenue Drop -30%</td><td>₹0</td><td><span class="status-fail">❌ Fail</span></td></tr>
+                <tr><td>30-Day Delay Haircut</td><td>₹1,05,000</td><td><span class="status-pass">✅ Pass</span></td></tr>
+                <tr><td>Emergency ₹50k Shock</td><td>₹1,00,000</td><td><span class="status-pass">✅ Pass</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="summary-text" id="summaryAffordability">Moderate vulnerability: Proposed EMI is serviceable under baseline, but fails severe 30% revenue shock.</p>
+        </div>
+      </article>
+
+      <!-- 2. Prepayment vs Investment Card -->
+      <article class="advisory-card glass-card" id="cardPrepayment">
+        <div class="card-header">
+          <div class="card-title-group">
+            <div class="card-icon icon-cobalt">💰</div>
+            <div>
+              <h2 class="card-title">Prepayment vs. Investment</h2>
+              <span class="card-subtitle">Amortization & Corporate Tax Shield</span>
+            </div>
+          </div>
+          <span class="verdict-badge badge-emerald" id="badgePrepayment">Prepay Advised</span>
+        </div>
+
+        <div class="card-body">
+          <div class="metric-row">
+            <div class="metric-box">
+              <span class="metric-label">Guaranteed Interest Saved</span>
+              <span class="metric-value highlight-green" id="valInterestSaved">₹1,05,662</span>
+            </div>
+            <div class="metric-box">
+              <span class="metric-label">After-Tax Savings (25% Shield)</span>
+              <span class="metric-value" id="valAfterTaxSaved">₹79,247</span>
+            </div>
+            <div class="metric-box">
+              <span class="metric-label">Tenure Reduced</span>
+              <span class="metric-value highlight-blue" id="valTenureReduced">12 Months</span>
+            </div>
+          </div>
+
+          <div class="tradeoff-box">
+            <div class="tradeoff-header">
+              <span class="tradeoff-label">Projected Investment Gain (10% p.a.)</span>
+              <span class="tradeoff-value" id="valInvestGain">₹99,300</span>
+            </div>
+            <div class="tradeoff-bar-wrap">
+              <div class="tradeoff-bar-prepay" style="width: 52%;" title="Interest Saved"></div>
+              <div class="tradeoff-bar-invest" style="width: 48%;" title="Investment Gain"></div>
+            </div>
+            <div class="tradeoff-legend">
+              <span>🟢 Guaranteed Risk-Free Savings</span>
+              <span>🔵 Market-Yield Investment</span>
+            </div>
+          </div>
+
+          <p class="summary-text" id="summaryPrepayment">Prepayment provides guaranteed risk-free savings equal to the loan interest rate, reducing debt leverage immediately.</p>
+        </div>
+      </article>
+
+      <!-- 3. Statutory Loan Scheme Card -->
+      <article class="advisory-card glass-card" id="cardStatutory">
+        <div class="card-header">
+          <div class="card-title-group">
+            <div class="card-icon icon-amber">🏛️</div>
+            <div>
+              <h2 class="card-title">Statutory Loan Scheme</h2>
+              <span class="card-subtitle">RBI Master Direction & CGTMSE RAG</span>
+            </div>
+          </div>
+          <span class="verdict-badge badge-emerald" id="badgeStatutory">CGTMSE Cover</span>
+        </div>
+
+        <div class="card-body">
+          <div class="statutory-highlight" id="statutoryHighlight">
+            <h3 class="highlight-title" id="statutoryTitle">Collateral-Free MSE Facility (RBI Sec 4.1a)</h3>
+            <p class="highlight-desc" id="statutoryDesc">Banks are mandated by RBI Master Direction Chapter IV not to accept collateral security in the case of loans up to ₹20 Lakhs extended to MSE units.</p>
+          </div>
+
+          <div class="benefit-pillars" id="statutoryPillars">
+            <div class="pillar-item">
+              <span class="pillar-bullet">🛡️</span>
+              <div>
+                <strong>Asset Protection:</strong> Unencumbered property remains safe.
+              </div>
+            </div>
+            <div class="pillar-item">
+              <span class="pillar-bullet">📑</span>
+              <div>
+                <strong>CGTMSE Coverage:</strong> Up to 85% credit guarantee cover.
+              </div>
+            </div>
+            <div class="pillar-item">
+              <span class="pillar-bullet">📈</span>
+              <div>
+                <strong>Tax Shield:</strong> 100% interest paid is deductible under Sec 37(1).
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 4. Contract & Fair Practices Audit Card -->
+      <article class="advisory-card glass-card" id="cardContract">
+        <div class="card-header">
+          <div class="card-title-group">
+            <div class="card-icon icon-rose">⚖️</div>
+            <div>
+              <h2 class="card-title">Contract & KFS Audit</h2>
+              <span class="card-subtitle">RBI Fair Practices Code Audit</span>
+            </div>
+          </div>
+          <span class="verdict-badge badge-amber" id="badgeContract">2 Flags Found</span>
+        </div>
+
+        <div class="card-body">
+          <div class="flags-list" id="contractFlagsList">
+            <div class="flag-item flag-warning">
+              <div class="flag-header">
+                <span class="flag-tag tag-warning">Processing Fee High</span>
+                <span class="flag-clause">Clause 4.2: 3.5% fee</span>
+              </div>
+              <p class="flag-desc">Processing fee of 3.5% exceeds typical RBI/market norm of 1.0%–2.0% for MSE working capital.</p>
+            </div>
+            <div class="flag-item flag-danger">
+              <div class="flag-header">
+                <span class="flag-tag tag-danger">Foreclosure Penalty Flag</span>
+                <span class="flag-clause">Clause 9.1: 4.0% prepayment fee</span>
+              </div>
+              <p class="flag-desc">RBI circulars prohibit foreclosure charges/prepayment penalties on floating-rate MSE term loans.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+    </main>
+
+    <!-- Raw Markdown Advisory Output Modal / Accordion -->
+    <details class="report-drawer glass-card">
+      <summary class="report-drawer-summary">
+        <span>📜 Full Synthesized Markdown Advisory Report</span>
+        <button class="copy-btn" id="copyReportBtn" type="button">Copy Markdown</button>
+      </summary>
+      <pre class="raw-markdown-view" id="rawMarkdownView">Awaiting analysis run...</pre>
+    </details>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <span>CreditAgent AI Orchestrator • n8n v2.34+ • Pinecone RAG • Web Speech API</span>
+    </footer>
+
+  </div>
+
+  <!-- Webhook Settings Modal -->
+  <div class="modal-overlay" id="settingsModal" style="display:none;">
+    <div class="modal-content glass-card">
+      <div class="modal-header">
+        <h3>Webhook & API Configuration</h3>
+        <button class="close-modal-btn" id="closeSettingsBtn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="settingWebhookUrl">Target n8n Webhook URL</label>
+          <input type="text" id="settingWebhookUrl" class="text-input" value="http://localhost:5678/webhook/credit-agent">
+          <small>Use <code>http://localhost:5678/webhook/credit-agent</code> for live production or <code>http://localhost:5678/webhook-test/credit-agent</code> for testing.</small>
+        </div>
+        <div class="form-group">
+          <label for="settingAutoSpeak">Auto-Speak Verdict with Voice (TTS)</label>
+          <input type="checkbox" id="settingAutoSpeak" checked>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="secondary-btn" id="resetSettingsBtn">Reset Default</button>
+        <button class="primary-action-btn" id="saveSettingsBtn">Save Configuration</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
