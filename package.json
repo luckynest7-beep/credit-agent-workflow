@@ -1,0 +1,19 @@
+{
+  "name": "credit-agent-backend",
+  "version": "1.0.0",
+  "description": "Deterministic financial calculation engines, resilient synchronization barriers, and test suites for n8n Credit Agent Workflow",
+  "main": "src/math/affordability.js",
+  "scripts": {
+    "test": "node --test tests/financial_math.test.js"
+  },
+  "keywords": [
+    "credit-agent",
+    "financial-math",
+    "amortization",
+    "stress-testing",
+    "n8n",
+    "rag"
+  ],
+  "author": "Credit Agent System",
+  "license": "MIT"
+}
